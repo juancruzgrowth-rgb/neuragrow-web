@@ -80,8 +80,8 @@ const AetherFlowHero = ({ isDark, title, subtitle, ctaPrimary, ctaSecondary }: A
 
         function init() {
             particles = [];
-            let numberOfParticles = (canvas!.height * canvas!.width) / 12000;
-            const particleColor = isDark ? 'rgba(181, 123, 238, 0.4)' : 'rgba(147, 51, 234, 0.3)';
+            let numberOfParticles = (canvas!.height * canvas!.width) / 9000;
+            const particleColor = isDark ? 'rgba(191, 128, 255, 0.8)' : 'rgba(147, 51, 234, 0.6)';
             
             for (let i = 0; i < numberOfParticles; i++) {
                 let size = (Math.random() * 2) + 1;
@@ -103,16 +103,26 @@ const AetherFlowHero = ({ isDark, title, subtitle, ctaPrimary, ctaSecondary }: A
 
         const connect = () => {
             let opacityValue = 1;
-            const lineColor = isDark ? '181, 123, 238' : '147, 51, 234';
+            const baseLineColor = isDark ? '200, 150, 255' : '147, 51, 234';
             
             for (let a = 0; a < particles.length; a++) {
                 for (let b = a; b < particles.length; b++) {
                     let distance = ((particles[a].x - particles[b].x) * (particles[a].x - particles[b].x))
                         + ((particles[a].y - particles[b].y) * (particles[a].y - particles[b].y));
                     
-                    if (distance < (canvas.width / 8) * (canvas.height / 8)) {
-                        opacityValue = 1 - (distance / 30000);
-                        ctx.strokeStyle = `rgba(${lineColor}, ${opacityValue * 0.2})`;
+                    if (distance < (canvas.width / 7) * (canvas.height / 7)) {
+                        opacityValue = 1 - (distance / 20000);
+                        
+                        let dx_mouse_a = particles[a].x - (mouse.x || 0);
+                        let dy_mouse_a = particles[a].y - (mouse.y || 0);
+                        let distance_mouse_a = Math.sqrt(dx_mouse_a*dx_mouse_a + dy_mouse_a*dy_mouse_a);
+
+                        if (mouse.x && distance_mouse_a < mouse.radius) {
+                             ctx.strokeStyle = isDark ? `rgba(255, 255, 255, ${opacityValue})` : `rgba(181, 123, 238, ${opacityValue})`;
+                        } else {
+                             ctx.strokeStyle = `rgba(${baseLineColor}, ${opacityValue})`;
+                        }
+                        
                         ctx.lineWidth = 1;
                         ctx.beginPath();
                         ctx.moveTo(particles[a].x, particles[a].y);
