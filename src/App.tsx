@@ -18,6 +18,9 @@ import {
   Sun,
   Moon
 } from "lucide-react";
+import { SplineScene } from "@/src/components/ui/splite";
+import { Card } from "@/src/components/ui/card";
+import { Spotlight } from "@/src/components/ui/spotlight";
 
 const fadeInUp = {
   initial: { opacity: 0, y: 20 },
@@ -43,8 +46,8 @@ const tools = [
 
 function InteractiveGrid() {
   return (
-    <div className="absolute inset-0 grid grid-cols-[repeat(auto-fill,40px)] grid-rows-[repeat(auto-fill,40px)] opacity-40 pointer-events-none sm:pointer-events-auto">
-      {Array.from({ length: 1000 }).map((_, i) => (
+    <div className="absolute inset-0 grid grid-cols-[repeat(auto-fill,40px)] grid-rows-[repeat(auto-fill,40px)] opacity-60 pointer-events-auto">
+      {Array.from({ length: 2000 }).map((_, i) => (
         <div key={i} className="grid-cell w-10 h-10" />
       ))}
     </div>
@@ -92,14 +95,16 @@ export default function App() {
       </nav>
 
       {/* Hero Section */}
-      <section className="relative pt-40 pb-24 overflow-hidden">
-        <InteractiveGrid />
-        <div className="container max-w-7xl mx-auto px-6 relative z-10 text-center">
+      <section className="relative pt-40 pb-24 overflow-hidden hero-glow">
+        <div className="absolute inset-0 z-0">
+          <InteractiveGrid />
+        </div>
+        <div className="container max-w-7xl mx-auto px-6 relative z-10 text-center pointer-events-none">
           <motion.h1 
             initial={{ opacity: 0, y: 30 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8, ease: "easeOut" }}
-            className="text-5xl md:text-7xl font-bold tracking-tighter mb-8 max-w-5xl mx-auto leading-[1.05]"
+            className="text-5xl md:text-7xl font-bold tracking-tighter mb-8 max-w-5xl mx-auto leading-[1.05] pointer-events-auto"
           >
             El socio definitivo en IA y automatización para empresas B2B que quieren crecer.
           </motion.h1>
@@ -107,7 +112,7 @@ export default function App() {
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8, delay: 0.2, ease: "easeOut" }}
-            className="text-xl text-[var(--text-muted)] max-w-2xl mx-auto mb-12 leading-relaxed"
+            className="text-xl text-[var(--text-muted)] max-w-2xl mx-auto mb-12 leading-relaxed pointer-events-auto"
           >
             Automatizamos procesos, generamos leads y construimos sistemas inteligentes que trabajan mientras vos dormís.
           </motion.p>
@@ -115,7 +120,7 @@ export default function App() {
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8, delay: 0.4, ease: "easeOut" }}
-            className="flex flex-col sm:flex-row items-center justify-center gap-4 mb-24"
+            className="flex flex-col sm:flex-row items-center justify-center gap-4 mb-24 pointer-events-auto"
           >
             <button className="w-full sm:w-auto bg-primary text-white px-10 py-4 rounded-full font-bold text-lg hover:opacity-90 transition-all active:scale-95">
               Reservar llamada gratuita
@@ -129,7 +134,7 @@ export default function App() {
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             transition={{ duration: 1, delay: 0.6 }}
-            className="w-full max-w-5xl mx-auto"
+            className="w-full max-w-5xl mx-auto pointer-events-auto"
           >
             <p className="text-[10px] uppercase tracking-[0.3em] text-[var(--text-muted)] font-bold mb-8">Trabajamos con herramientas líderes</p>
             <div className="logo-mask overflow-hidden whitespace-nowrap relative">
@@ -301,30 +306,50 @@ export default function App() {
       </section>
 
       {/* CTA Section */}
-      <section className="py-40 border-t border-[var(--border)] relative overflow-hidden">
-        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[500px] h-[500px] bg-primary/10 blur-[120px] rounded-full pointer-events-none" />
-        <div className="max-w-7xl mx-auto px-6 text-center relative z-10">
-          <motion.h2 
-            {...fadeInUp}
-            className="text-5xl md:text-6xl font-bold mb-8 tracking-tighter max-w-4xl mx-auto leading-tight"
-          >
-            Reservá una llamada gratuita de 30 minutos.
-          </motion.h2>
-          <motion.p 
-            {...fadeInUp}
-            className="text-xl text-[var(--text-muted)] mb-12 max-w-2xl mx-auto"
-          >
-            Auditamos tu funnel y te mostramos exactamente dónde estás dejando dinero sobre la mesa.
-          </motion.p>
-          <motion.button 
-            {...fadeInUp}
-            whileHover={{ scale: 1.05 }}
-            whileTap={{ scale: 0.95 }}
-            className="bg-primary text-white px-12 py-5 rounded-full font-bold text-lg shadow-2xl shadow-primary/20"
-          >
-            Reservar mi llamada
-          </motion.button>
-        </div>
+      <section className="py-24 px-6 max-w-7xl mx-auto">
+        <Card className="w-full min-h-[600px] bg-[var(--surface)] border-[var(--border)] relative overflow-hidden rounded-3xl">
+          <Spotlight
+            className="-top-40 left-0 md:left-60 md:-top-20"
+            fill={isDark ? "white" : "#b57bee"}
+          />
+          
+          <div className="flex flex-col lg:flex-row h-full min-h-[600px]">
+            {/* Left content */}
+            <div className="flex-1 p-8 md:p-16 relative z-10 flex flex-col justify-center text-left">
+              <motion.span 
+                {...fadeInUp}
+                className="text-primary font-bold text-xs tracking-[0.2em] mb-6 block"
+              >
+                ¿LISTO PARA ESCALAR?
+              </motion.span>
+              <motion.h2 
+                {...fadeInUp}
+                className="text-4xl md:text-6xl font-bold tracking-tighter mb-8 leading-[1.1]"
+              >
+                Reservá una llamada gratuita de 30 minutos.
+              </motion.h2>
+              <motion.p 
+                {...fadeInUp}
+                className="text-lg md:text-xl text-[var(--text-muted)] mb-10 max-w-xl leading-relaxed"
+              >
+                Auditamos tu funnel y te mostramos exactamente dónde estás dejando dinero sobre la mesa. Sin compromisos, solo valor real.
+              </motion.p>
+              <motion.div {...fadeInUp}>
+                <button className="bg-primary text-white px-10 py-4 rounded-full font-bold text-lg hover:opacity-90 transition-all active:scale-95 shadow-xl shadow-primary/20">
+                  Reservar mi llamada
+                </button>
+              </motion.div>
+            </div>
+
+            {/* Right content - Spline Scene */}
+            <div className="flex-1 relative min-h-[400px] lg:min-h-full">
+              <SplineScene 
+                scene="https://prod.spline.design/kZDDjO5HuC9GJUM2/scene.splinecode"
+                className="w-full h-full"
+              />
+            </div>
+          </div>
+        </Card>
       </section>
 
       {/* Footer */}
