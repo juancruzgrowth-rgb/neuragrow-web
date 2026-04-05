@@ -21,6 +21,7 @@ import {
 import { SplineScene } from "@/src/components/ui/splite";
 import { Card } from "@/src/components/ui/card";
 import { Spotlight } from "@/src/components/ui/spotlight";
+import AetherFlowHero from "@/src/components/ui/aether-flow-hero";
 
 const fadeInUp = {
   initial: { opacity: 0, y: 20 },
@@ -43,16 +44,6 @@ const tools = [
   "OpenAI", "Anthropic", "Google", "n8n", "Zapier", "GoHighLevel", 
   "Supabase", "Notion", "WhatsApp", "VAPI", "Airtable", "PostgreSQL"
 ];
-
-function InteractiveGrid() {
-  return (
-    <div className="absolute inset-0 grid grid-cols-[repeat(auto-fill,40px)] grid-rows-[repeat(auto-fill,40px)] opacity-60 pointer-events-auto">
-      {Array.from({ length: 2000 }).map((_, i) => (
-        <div key={i} className="grid-cell w-10 h-10" />
-      ))}
-    </div>
-  );
-}
 
 export default function App() {
   const [isDark, setIsDark] = useState(true);
@@ -95,45 +86,20 @@ export default function App() {
       </nav>
 
       {/* Hero Section */}
-      <section className="relative pt-40 pb-24 overflow-hidden hero-glow">
-        <div className="absolute inset-0 z-0">
-          <InteractiveGrid />
-        </div>
-        <div className="container max-w-7xl mx-auto px-6 relative z-10 text-center pointer-events-none">
-          <motion.h1 
-            initial={{ opacity: 0, y: 30 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8, ease: "easeOut" }}
-            className="text-5xl md:text-7xl font-bold tracking-tighter mb-8 max-w-5xl mx-auto leading-[1.05] pointer-events-auto"
-          >
-            El socio definitivo en IA y automatización para empresas B2B que quieren crecer.
-          </motion.h1>
-          <motion.p 
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8, delay: 0.2, ease: "easeOut" }}
-            className="text-xl text-[var(--text-muted)] max-w-2xl mx-auto mb-12 leading-relaxed pointer-events-auto"
-          >
-            Automatizamos procesos, generamos leads y construimos sistemas inteligentes que trabajan mientras vos dormís.
-          </motion.p>
-          <motion.div 
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8, delay: 0.4, ease: "easeOut" }}
-            className="flex flex-col sm:flex-row items-center justify-center gap-4 mb-24 pointer-events-auto"
-          >
-            <button className="w-full sm:w-auto bg-primary text-white px-10 py-4 rounded-full font-bold text-lg hover:opacity-90 transition-all active:scale-95">
-              Reservar llamada gratuita
-            </button>
-            <button className="w-full sm:w-auto border border-[var(--border)] px-10 py-4 rounded-full font-bold text-lg hover:bg-[var(--foreground)] hover:text-[var(--background)] transition-all active:scale-95">
-              Ver casos de éxito
-            </button>
-          </motion.div>
-
+      <section className="relative overflow-hidden">
+        <AetherFlowHero 
+          isDark={isDark}
+          title="El socio definitivo en IA y automatización para empresas B2B que quieren crecer."
+          subtitle="Automatizamos procesos, generamos leads y construimos sistemas inteligentes que trabajan mientras vos dormís."
+          ctaPrimary="Reservar llamada gratuita"
+          ctaSecondary="Ver casos de éxito"
+        />
+        
+        <div className="container max-w-7xl mx-auto px-6 relative z-20 pb-24 text-center">
           <motion.div 
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
-            transition={{ duration: 1, delay: 0.6 }}
+            transition={{ duration: 1, delay: 1.2 }}
             className="w-full max-w-5xl mx-auto pointer-events-auto"
           >
             <p className="text-[10px] uppercase tracking-[0.3em] text-[var(--text-muted)] font-bold mb-8">Trabajamos con herramientas líderes</p>

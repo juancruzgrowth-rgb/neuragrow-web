@@ -81,21 +81,3 @@
   0% { transform: rotate(0deg); }
   100% { transform: rotate(360deg); }
 }
-
-.grid-cell {
-  @apply border-[0.5px] border-white/5 transition-all duration-200;
-}
-
-.grid-cell:hover {
-  @apply bg-primary/40 border-primary shadow-[0_0_25px_rgba(181,123,238,0.6)];
-  z-index: 10;
-  filter: brightness(1.2);
-}
-
-.dark .grid-cell {
-  @apply border-white/5;
-}
-
-.light .grid-cell {
-  @apply border-black/5;
-}
